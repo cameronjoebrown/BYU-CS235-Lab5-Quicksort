@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "QSInterface.h"
 #include <string>
+#include <sstream>
 
 using namespace std;
 

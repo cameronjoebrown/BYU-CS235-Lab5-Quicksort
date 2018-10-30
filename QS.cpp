@@ -8,6 +8,12 @@
 
 #include "QS.h"
 
+QS::QS(){
+    
+}
+QS::~QS(){
+    
+}
 /*
  * sortAll()
  *
@@ -46,7 +52,14 @@ void QS::sortAll() {
  *        the index of the pivot (middle index); -1 if provided with invalid input
  */
 int QS::medianOfThree(int left, int right) {
+    if(currentIndex == 0 || arraySize <= 0){
+        return -1;
+    }
+    if(left >= right || left < 0 || right > currentIndex -1){
+        return -1;
+    }
     
+    return 0;
 }
 
 /*
@@ -74,32 +87,32 @@ int QS::medianOfThree(int left, int right) {
  */
 int QS::partition(int left, int right, int pivotIndex) {
     
+    return 0;
 }
 
-/*
- * Produces a comma delimited string representation of the array. For example: if my array
- * looked like {5,7,2,9,0}, then the string to be returned would look like "5,7,2,9,0"
- * with no trailing comma.  The number of cells included equals the number of values added.
- * Do not include the entire array if the array has yet to be filled.
- *
- * Returns an empty string, if the array is NULL or empty.
- *
- * @return
- *        the string representation of the current array
- */
-string QS::getArray(){
-    
+string QS::getArray() const{
+    if(currentIndex == 0 || arraySize <= 0){
+        return "";
+    }
+    ostringstream ss;
+    for(int i = 0; i < currentIndex; i++){
+        if(i != 0){
+            ss << ",";
+        }
+        ss << newArray[i];
+    }
+    string array = ss.str();
+    return ss.str();
 }
 
-/*
- * Returns the number of elements which have been added to the array.
- */
-int QS::getSize() {
 
+int QS::getSize() const {
+
+    return currentIndex;
 }
 
 bool QS::addToArray(int value) {
-    if(currentIndex > arraySize){
+    if(currentIndex >= arraySize){
         return false;
     }
     else {
@@ -109,11 +122,10 @@ bool QS::addToArray(int value) {
     }
 }
 
-/*
- * @param
- *        size of array */
 bool QS::createArray(int capacity) {
-    clear();
+    if(arraySize > 0){
+        clear();
+    }
     if(capacity < 0){
         return false;
     }
