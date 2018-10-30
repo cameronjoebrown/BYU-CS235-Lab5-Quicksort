@@ -9,10 +9,10 @@
 #include "QS.h"
 
 QS::QS(){
-    
+    newArray = NULL;
 }
 QS::~QS(){
-    
+    clear();
 }
 /*
  * sortAll()
@@ -26,40 +26,32 @@ void QS::sortAll() {
     
 }
 
-/*
- * medianOfThree()
- *
- * The median of three pivot selection has two parts:
- *
- * 1) Calculates the middle index by averaging the given left and right indices:
- *
- * middle = (left + right)/2
- *
- * 2) Then bubble-sorts the values at the left, middle, and right indices.
- *
- * After this method is called, data[left] <= data[middle] <= data[right].
- * The middle index will be returned.
- *
- * Returns -1 if the array is empty, if either of the given integers
- * is out of bounds, or if the left index is not less than the right
- * index.
- *
- * @param left
- *         the left boundary for the subarray from which to find a pivot
- * @param right
- *         the right boundary for the subarray from which to find a pivot
- * @return
- *        the index of the pivot (middle index); -1 if provided with invalid input
- */
 int QS::medianOfThree(int left, int right) {
     if(currentIndex == 0 || arraySize <= 0){
         return -1;
     }
-    if(left >= right || left < 0 || right > currentIndex -1){
+    if(left >= right || left < 0 || right > currentIndex - 1){
         return -1;
     }
-    
-    return 0;
+    int tempVal;
+    int middle = (left + right) / 2;
+    if(!(newArray[left] < newArray[middle])){
+        tempVal = newArray[left];
+        newArray[left] = newArray[middle];
+        newArray[middle] = tempVal;
+    }
+    if(!(newArray[middle] < newArray[right])){
+        tempVal = newArray[right];
+        newArray[right] = newArray[middle];
+        newArray[middle] = tempVal;
+    }
+    if(!(newArray[left] < newArray[middle])){
+        tempVal = newArray[left];
+        newArray[left] = newArray[middle];
+        newArray[middle] = tempVal;
+    }
+    getArray();
+    return middle;
 }
 
 /*
